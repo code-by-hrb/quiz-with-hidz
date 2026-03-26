@@ -8,14 +8,26 @@
    body {
     margin: 0;
     padding: 0;
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     color: white;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden; 
+    overflow-y: auto;
     justify-content:space-between;
     position: relative; /* Required for the blur layer */
     overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+    .content-wrapper {
+    width: 90%; 
+    max-width: 800px; 
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
 }
 
 /* This creates the blurred background layer */
@@ -56,7 +68,7 @@ body::before {
  }
 </style>
 <body><div style="background-color: lightblue; text-align: center; font: weight 500px;; color:black"> 
-
+<div class="content-wrapper">
 <div class="about"><marquee> <h1 style="font-family:Georgia, 'Times New Roman', Times, serif; letter-spacing: 3px; color:navy; text-align: center; padding-bottom:5px;"> Making Knowledge Accessible & Fun </h1></marquee></div>
 <h2 style="text-align: left; color:whitesmoke; font-size: 30px; margin-top:30px;"><U>OUR MISSION:</U></h2>
 <p style="font-size: 22px; font-family:Georgia, 'Times New Roman', Times, serif ;"> Traditional Quiz systems often rely on manual, paper-based tests or static documents that lack management and accessibility.<br> Our Mission is to modernize this process this process by providing a <b>user-friendly, responsive interface</b> that makes learning interactive and efficient.</p>
@@ -65,5 +77,5 @@ body::before {
 <li> <b><u> Dynamic Subject Selection:</u> </b>  Available subjects are automatically adjusted based on the user's selected age group.</li>
 <li> <b><u>Time Managemnt:</u></b>  To encourage focus, each quiz consists of 10 Multiple Choice Questiobns (MCQs) thst must be completed within 5-minute timer.</li>
 <li> <b><u>Immediate Feedback:</u></b>  We eliminate the "delayed evaluation" found in manual scoring. <br>Results and scores are calculated instantly upon submission providing users with immediate perfomance records.</li></ul></P>
-</body>
+</div><div></body>
 </html>
