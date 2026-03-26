@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+   body{
+        margin:0;
+        display:flex;
+        justify-content:center ;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #d1d8e0;
+        font-family: 'Seoge UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+.login-card{
+    display: flex;
+    height:650px;
+    background: #fff;
+    width: 1500px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    overflow:hidden;
+}
+.left-panel{
+    flex:1;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+    url('https://thumbs.dreamstime.com/b/brain-bulb-ai-generated-image-289682737.jpg');
+   background-position:center;
+    display: flex;
+    background-size:cover;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color:white;
+    padding: 20px;
+}
+.left-panel .logo{
+    width: 120px;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+.left-panel h1{
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    margin-top: 15px;
+    font-weight:300px
+}
+.left-panel p{
+    font-size:1.5rem ;
+    letter-spacing: 1px;
+    font-weight: 230px;
+}
+.right-panel{
+    flex:1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+.form-container{
+    width:100%;
+    max-width: 320px;
+    padding:20px;
+}
+.form-container h2{
+    margin-bottom: 30px;
+    margin-left: 36px;
+    text-align: center;
+    color:#333;
+    font-weight: 600px;
+    font-size: 26px;
+}
+.input{
+    margin-bottom: 20px;
+    width:100%;
+    padding: 12px;
+    border-radius:5px;
+}
+.input input{
+    width:100%;
+    padding: 20px 15px;
+    border:1px solid #ddd;
+    border-radius: 8px;
+}
+.inout input:focus{
+    border-color: #ff6b00;
+}
+.login-btn{
+    width: 100%;
+    padding: 12px;
+    background: #ff6b00;
+    border:none;
+    border-radius: 5px;
+    color:white;
+    font-weight: 600px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.login-btn hover{
+    background: #e65a00;
+}
+.forgot-pass{
+    display: block;
+    text-align: right;
+    font-size: 1rem;
+    color:#777;
+    text-decoration: none;
+    margin-bottom:15px;
+}
+
+
+</style>
+<body>
+    <div class="login-card">
+    <div class="left-panel">
+ <DIV class="overlay-text"> 
+    <h1>QUIZ WITH HIDZ</h1>
+<p> Unlock Your Knowledge </p></DIV>
+    </div>
+    <div class="right-panel">
+        <div class="form-container">
+            <h2> Welcome, Quiz Master!</h2>
+            <form id="loginForm">
+                <div class="input">
+                    <input type="text" id="username-input" placeholder="Enter Your Name" required><br>
+                <input type="email" id="email" placeholder="Email Address" required><br>
+                <input type="password" id="password" placeholder="Enter Password" required><br>
+                <a href="#" class="forgot-pass"> Forgot Password?</a><br>
+                <button type="submit" class="login-btn"> LOGIN</button><br>
+            </form>
+        </div>
+    </div>
+<script>
+
+       const myForm= document.getElementById('loginForm');
+       myForm.addEventListener('submit', function(event){
+        event.preventDefault();
+        const emailvalue= document.getElementById('email').value;
+        const passvalue= document.getElementById('password').value;
+        if (emailvalue!=="" && passvalue!=="") {
+            window.location.href="age.html";
+        }
+        else{
+            alert("Please Fill In Both Email And  Password.");
+        }
+        });
+  
+    document.getElementById('username-input').addEventListener('input', function() {
+        localStorage.setItem('quizUserName', this.value);
+    });
+
+   
+    function goToSubjects(ageGroup) {
+        const nameInput = document.getElementById('username-input').value;
+
+        if (nameInput.trim() === "") {
+            alert("Please enter your name to continue!");
+            return;
+        }
+        window.location.href = "subjects.html?group=" + ageGroup;
+    }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Quiz</title>
+</head><style>
+   body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    position: relative; /* Required for the blur layer */
+    overflow: hidden;
+}
+
+/* This creates the blurred background layer */
+body::before {
+    content: "";
+    position: fixed; /* Keeps it in place while scrolling */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://static.vecteezy.com/system/resources/thumbnails/043/732/088/small_2x/question-mark-particle-appear-slow-float-and-faded-with-bubbles-on-the-dark-blue-background-free-video.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: blur(8px);
+    background-color: rgba(65, 64, 64, 0.5); 
+    background-blend-mode: darken;
+    z-index: -1; 
+    transform: scale(1.1);
+}
+ div{
+    height:50px;
+    width:100%;
+    padding-bottom:0.5px;  
+ }
+ p{
+    color:white;
+    text-align: left;
+    font-size:18px;
+    font-family:cursive;
+ }
+ .about div{
+    display:flex;
+    flex-direction: column;
+    min-height: 100%;
+
+
+ }
+</style>
+<body><div style="background-color: lightblue; text-align: center; font: weight 500px;; color:black"> 
+
+<div class="about"><marquee> <h1 style="font-family:Georgia, 'Times New Roman', Times, serif; letter-spacing: 3px; color:navy; text-align: center; padding-bottom:5px;"> Making Knowledge Accessible & Fun </h1></marquee></div>
+<h2 style="text-align: left; color:whitesmoke; font-size: 30px; margin-top:30px;"><U>OUR MISSION:</U></h2>
+<p style="font-size: 22px; font-family:Georgia, 'Times New Roman', Times, serif ;"> Traditional Quiz systems often rely on manual, paper-based tests or static documents that lack management and accessibility.<br> Our Mission is to modernize this process this process by providing a <b>user-friendly, responsive interface</b> that makes learning interactive and efficient.</p>
+<h2 style="text-align: left; color:whitesmoke; font-size: 30px; padding:4px;"><U>OUR KEY FEATURES:</U></h2>
+<P style="text-align: left; color:whitesmoke; font-size: 22px; line-height: 4px;"> <ul style="text-align: left; color:whitesmoke; font-size: 22px; font-family: Georgia, 'Times New Roman', Times, serif;"> <li><b> <u>Age-Appropriate Content:</u></b> Users can select their age specific age group to ensure the quiz subjects are relevant to their level.</li>
+<li> <b><u> Dynamic Subject Selection:</u> </b>  Available subjects are automatically adjusted based on the user's selected age group.</li>
+<li> <b><u>Time Managemnt:</u></b>  To encourage focus, each quiz consists of 10 Multiple Choice Questiobns (MCQs) thst must be completed within 5-minute timer.</li>
+<li> <b><u>Immediate Feedback:</u></b>  We eliminate the "delayed evaluation" found in manual scoring. <br>Results and scores are calculated instantly upon submission providing users with immediate perfomance records.</li></ul></P>
+</body>
+</html>

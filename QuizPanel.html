@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz With Hidz</title>
+    <style>
+        .hidden { display: none !important; }
+        body {
+            background-color: #060041;
+            background-image: url('https://static.vecteezy.com/system/resources/thumbnails/043/732/088/small_2x/question-mark-particle-appear-slow-float-and-faded-with-bubbles-on-the-dark-blue-background-free-video.jpg');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .user-display {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    z-index: 2000; /* Ensures it stays on top */
+}
+
+        /* FIXED: Increased Z-Index to ensure buttons are clickable */
+        .Quiz-container {
+            background: rgba(6, 0, 65, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            width: 420px;
+            min-height: 520px;
+            text-align: center;
+            color: white;
+            font-size: 22px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            position: relative;
+            z-index: 999; 
+        }
+
+        .option-btn {
+            display: block;
+            width: 100%;
+            margin: 12px 0;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+            position: relative;
+            z-index: 1000; /* Highest priority */
+        }
+     .house-shape {
+    width: 25px;
+    height: 20px;
+    background: whitesmoke;
+    border-radius: 2px;
+    
+    /* Position it in the Top Right */
+    position: fixed; 
+    top: 25px;      /* Distance from top */
+    right: 25px;    /* Distance from right */
+    
+    z-index: 100;   /* Keeps it above all other layers */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+/* Your roof code stays the same */
+.house-shape::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -1px;
+    width: 0;
+    height: 0;
+    border-left: 13px solid transparent;
+    border-right: 13px solid transparent;
+    border-bottom: 11px solid whitesmoke;
+}
+
+.house-shape:hover {
+    transform: scale(1.2);
+}
+
+        .option-btn:hover { background-color: #2980b9; transform: scale(1.02); }
+        .option-btn.selected { background-color: #f39c12 !important; border: 2px solid white; }
+        
+        .submit-btn { background-color: #27ae60 !important; font-weight: bold; margin-top: 20px; }
+
+        .star-container { margin: 18px 0; height: 65px; }
+        .star { font-size: 70px; color: #333; display: inline-block; opacity: 0; transform: scale(0); margin: 0 5px; }
+        .star.animate { animation: popIn 0.5s forwards; }
+        .star.glow { color: #f1c40f; text-shadow: 0 0 20px #f1c40f; }
+
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            70% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .review-box { 
+            text-align: left; background: rgba(0,0,0,0.5); 
+            padding: 15px; margin-top: 15px; border-radius: 8px; 
+            max-height: 200px; overflow-y: auto; font-size: 15px;
+            border: 1px solid #444;
+        }
+    </style>
+</head>
+<body>
+ 
+        <a href="login.html" class="home-icon" title="Go To Login">
+            <div class="house-shape"></div></a>
+        </a>
+         <div id="user-name-tag" class="user-display">👤 <span id="display-name">Guest</span></div>
+    <div class="Quiz-container">
+        <div id="quiz-box">
+            <div id="timer" style="font-weight: bold; color: #e74c3c; font-size: 20px;">5:00</div>
+            <h3 id="qs-content">Question 1</h3>
+            <p class="qs-text">Loading...</p>
+            <div id="options"></div>
+            <button id="next-btn" class="option-btn submit-btn" onclick="submitAnswer()">Submit Answer</button>
+        </div>
+
+        <div id="result" class="hidden">
+            <h2>Quiz Finished!</h2>
+            <div class="star-container">
+                <span id="star1" class="star">★</span>
+                <span id="star2" class="star">★</span>
+                <span id="star3" class="star">★</span>
+            </div>
+            <p id="final-score" style="font-size: 24px; color: #f1c40f; font-weight: bold;"></p>
+            
+            <button class="option-btn" style="background:#9b59b6" onclick="toggleReview()">Review Answers</button>
+            <button class="option-btn" onclick="location.reload()">Try Again</button>
+            <button class="option-btn" style="background:#e67e22" onclick="changeSubject()">Change Subject</button>
+           <a href="index.html">  <button class="option-btn" type="submit" value="logout" onclick=""><b>LOGOUT</b></button></a>
+ 
+            <div id="review-list" class="review-box hidden"></div>
+        </div>
+    </div>
+
+<script>
+  window.onload = function() {
+    const savedName = localStorage.getItem('quizUserName');
+    if (savedName) {
+        document.getElementById('display-name').innerText = savedName;
+    }
+    
+};
+const questions = {
+    junior: {
+        GK: [
+            {q: "Which is the largest planet?", o: ["Mars", "Jupiter", "Saturn", "Earth"], a: 1},
+            {q: "Days in a normal year?", o: ["300", "365", "366", "356"], a: 1},
+            {q: "Tallest animal on Earth?", o: ["Elephant", "Lion", "Bear", "Giraffe"], a: 3},
+            {q: "Colors in a rainbow?", o: ["5", "6", "7", "8"], a: 2},
+            {q: "Which is the 'Red Planet'?", o: ["Venus", "Mars", "Jupiter", "Mercury"], a: 1},
+            {q: "What do bees make?", o: ["Milk", "Honey", "Juice", "Water"], a: 1},
+            {q: "How many legs does a spider have?", o: ["6", "8", "4", "10"], a: 1},
+            {q: "Capital of France?", o: ["London", "Berlin", "Paris", "Rome"], a: 2},
+            {q: "Which fruit fell on Newton?", o: ["Banana", "Apple", "Pear", "Orange"], a: 1},
+            {q: "Fastest land animal?", o: ["Lion", "Cheetah", "Tiger", "Horse"], a: 1}
+        ],
+       Maths: [
+            {q: "What is the sum of 5 + 5?", o: ["11", "4", "10", "7"], a: 2},
+            {q: "How many sides does a hexagon have?", o: ["3", "7", "9", "6"], a: 3},
+            {q: "Which is larger: 74 or 47?", o: ["47", "74", "Both", "None"], a: 1},
+            {q: "2 x 3 = ?", o: ["5", "6", "8", "4"], a: 1},
+            {q: "10 - 4 = ?", o: ["5", "6", "7", "4"], a: 1},
+            {q: "What comes after 19?", o: ["18", "21", "20", "22"], a: 2},
+            {q: "How many corners in a square?", o: ["3", "4", "5", "0"], a: 1},
+            {q: "Half of 20?", o: ["5", "10", "15", "2"], a: 1},
+            {q: "3 + 3 + 3 = ?", o: ["6", "12", "9", "10"], a: 2},
+            {q: "Double of 4?", o: ["6", "8", "10", "12"], a: 1}
+        ],
+        Science: [
+            {q: "Which part of the plant makes food?", o: ["Roots", "Leaves", "Stem", "Flower"], a: 1},
+            {q: "Which gas do we inhale?", o: ["Carbon", "Sulphur", "Helium", "Oxygen"], a: 3},
+            {q: "Who studies space and stars?", o: ["Poet", "Astronomer", "Teacher", "Scientist"], a: 1},
+            {q: "What is ice?", o: ["Solid", "Liquid", "Gas", "Plasma"], a: 0},
+            {q: "Boiling point of water?", o: ["50°C", "90°C", "100°C", "120°C"], a: 2},
+            {q: "Largest organ of human body?", o: ["Heart", "Brain", "Skin", "Lungs"], a: 2},
+            {q: "Main source of energy for Earth?", o: ["Moon", "Sun", "Stars", "Electricity"], a: 1},
+            {q: "How many senses do humans have?", o: ["4", "5", "6", "7"], a: 1},
+            {q: "What do plants need to grow?", o: ["Soda", "Water", "Coffee", "Sand"], a: 1},
+            {q: "Earth's only natural satellite?", o: ["Mars", "Sun", "Moon", "Venus"], a: 2}
+        ],
+        Fun: [
+            {q: "What is the name of toy cowboy in the movie Toy Story?", o:["Woody", "Sid", "Hamm","Buzz Lightyear"], a:0},
+            {q: "Who lives in a pineapple under the sea?", o:["Masha & Bear", "SpongeBob SquarePants", "Tom & Jerry", "Oggy & Cockroaches"], a:1},
+            {q: "What is the namme of the snowman in Frozen who likes warm hugs?", o:["Swen", "Olaf", "Kristroff", "Bruni"], a:1},
+            {q: "Which superhero can climb the walls and shoot webs from his hands?", o:["Hulk", "Power Rangers", "Spider-Man", "Thor"], a:2},
+            {q: "What color are the Smurfs?", o:["Green", "Pink", "White", "Blue"], a:3},
+            {q: "In the Harry Potter books, what is the name of the school for wizards?", o:["Hogwarts","Willowshade Sanctrum", "Elderwood Academy", "Glintstone School Of Charms"], a:0},
+            {q:"In the movie Finding Nemo, what kind of fish is Nemo?", o:["Blue Tang", "Goldfish", "Shark", "Clownfish"], a:3},
+            {q:"Which yellow, electric-type Pokémon is the best friend and partner of the trainer Ash Ketchum?", o:["Charmandar", "Squirtle", "Pikachu","Eevee"], a:2},
+            {q:"Which famous singer is known for her 'Eras Tour' and songs like 'Shake It Off'?", o:["Araiana Garnde", "Taylor Swift", "Billie Eilish", "Sabrina Carpenter"], a:1},
+            {q:"What is the name of Mickey Mouse's pet dog?", o:["Eric", "Olaf", "Dumbo", "Pluto"], a:3},
+        ]
+    },
+     intermediate: {
+        GK: [
+            {q: "Capital of India?", o: ["Mumbai", "New Delhi", "Kolkata", "Chennai"], a: 1},
+            {q: "Largest ocean?", o: ["Atlantic", "Pacific", "Indian", "Arctic"], a: 1},
+            {q: "Who wrote Romeo and Juliet?", o: ["Shakespeare", "Homer", "Dickens", "Twain"], a: 0},
+            {q: "Currency of USA?", o: ["Euro", "Pound", "Dollar", "Yen"], a: 2},
+            {q: "Longest river in the world?", o: ["Amazon", "Nile", "Ganges", "Mississippi"], a: 1},
+            {q: "Which country has the most population?", o: ["USA", "China", "India", "Russia"], a: 2},
+            {q: "First man to walk on the moon?", o: ["Buzz Aldrin", "Neil Armstrong", "Yuri Gagarin", "Elon Musk"], a: 1},
+            {q: "Smallest continent?", o: ["Europe", "Africa", "Australia", "Antarctica"], a: 2},
+            {q: "Which planet is known as the Blue Planet?", o: ["Mars", "Earth", "Neptune", "Uranus"], a: 1},
+            {q: "How many continents are there?", o: ["5", "6", "7", "8"], a: 2}
+        ],
+        Science:[
+             {q: "Which part of the plant cell is responsible for photosynthesis, giving plants their green color?", o:["Nucleus", "Chloroplast", "Cell Wall", "Mitochondria"], a:1},
+             {q: "According to Newton's First Law of Motion, an object at rest will stay at rest unless acted upon by what?", o:["An unbaalnced force", "Velocity", "Friction", "Gravity"], a:0},
+             {q: "Which of the following is a 'Chemical Change'?", o:["Chopping wood", "Dissolving sugar in tea", "iron rsuting", "Ice melting into water"], a:2},
+             {q: "What is the pH value of pure, neutral water?", o:["14", "7", "10", "0"], a:1},
+             {q: "Which planet is known as the 'Red Planet' due to the iron oxide on its surface?", o:["Jupiter", "Saturn", "Venus", "Mars"], a:3},
+             {q: "In a human body, which gas is exchanged for Oxygen in the lungs to be exhaled?", o:["hydrogen", "Carbon dioxide", "Nitrogen", "Helium"], a:1},
+             {q: "What is the primary source of energy for the Earth's water cycle?", o:["The Sun", "The Moon", "Wind", "Volcanoes"], a:0},
+             {q: "Which state of matter has a definite volume but takes the shape of its container?", o:["gas", "Solid", "Liquid", "Plasma"], a:2},
+             {q: "Sound waves cannot travel through which of the following?", o:["A Vaccum", "Air", "Steel", "Water"], a:0},
+             {q: "What is the chemical symbol for the elment Gold?", o:["Au", "Gd", "Ag", "Fe"], a:0},
+     ],
+
+        Maths:[
+            {q: "Which of these numbers is a 'Prime number'?", o:["15", "9", "13", "21"], a:2},
+            {q: "If a square has a perimeter of 20 cm, what is the length of one side?", o:["4 cm", "10 cm", "5 cm", "25cm"], a:2},
+            {q: "What is the value of X in the equation: 2X + 10 =30 ", o:["20", "10", "15", "5"], a:1},
+            {q: "If you roll a standard 6-sided die, what are the chnaces of rolling an Even number", o:["2 out of 3", "1 out of 6", "1 out of 3", "1 out of 2"], a:3}, 
+            {q: "What is 2 to the power of 4 ie. (2)^4 ?", o:["16", "8", "32", "6"], a:0},
+            {q: "A triangle has angles of 60° and 40°. What is the measurement of the third angle?", o:["180°","100°", "80°", "90°"], a:2},
+            {q: "If a car travels at 60 miles per hour, how far will it trabvel in 2.5 hours?", o:["130 miles", "150 miles", "180 miles", "120 miles"], a:1},
+            {q: "What is the square root of 144?", o:["11", "72", "12", "14"], a:2},
+            {q: "IF you have 3 apples and 4 oranges in your bag, what is the ratio of apples to the total number of fruit?", o:["3:7", "3:4", "4:7", "7:3"], a:0},
+            {q: "What is any non-zero number raised to the power of 0?", o:["0", "1", "The number itself", "Infinity"], a:1},
+        ],
+        SocialStudies: [
+            {q: "In which country would you find the Effiel Tower?", o:["Italy", "France", "Germany", "Spain"], a:1 },
+            {q: "What is the Statue of Liberty made of that gives it its green color? ", o:["Painted Steel", "Green Stones", "Copper", "Plastic"], a:2 },
+            {q: "If you are looking at a map, which direction is usually located at the bottom?", o:["North", "East", "South", "West"], a:2},
+            {q: "Which famous wall was build to protect the northern borders of the Chinese Empire?", o:["The Berlin Wall", "The Western Wall", "The Great Wall Of China", "The Roman Wall"], a:2},
+            {q: "Which of these is a duty of a good citizen?", o:["Ignoring the news", "Voting in elections", "Braeking minor rules", "Never helping neighbours"], a:1},
+            {q: "Mount Everest, the highest point on earth, is located in which mountain range?", o:["The Andes", "The Rockies", "The Himalayas", "The Alps"], a:2},
+            {q: "Which of these is a 'Renewable resource'?", o:["Coal", "Natural Gas", "Solar Energy", "Nuclear Energy"], a:2},
+            {q: "What is the name of the document that serves as the supreme law of the United states?", o:["The Declaration of Independence", "the Constitution", "The Magna Carta", "The Bills Of Rights"], a: 1},
+            {q: "Which continent is known as the 'Dark Continent' and is home to the Sahara Desert?", o:["Asia", "Australia", "Africa", "South America"], a:2 },
+            {q: "Who was the first President of India?", o:["Jawaharlal Nehru", "Atal Bihari Vajpayee", "Gandhiji", "Dr. Rajendra Prasad"], a:3 },
+        ],
+        Computer: [
+            {q: "What is often called the 'brain' of the computer because it processes all the instructions?", o:["Monitor", "Keyboard", "CPU (Central Processing Unit)", "Hard Drive"], a:2},
+            {q: "Which of these is an example of an 'Operating System'?", o:["Google Chrome", "Microsoft Windows", "Microsoft Word", "YouTube"], a:1},
+            {q: "In computer coding, what is a 'Bug'?", o:["A tiny insect inside the computer.", "An error in the code that prevents if from working properly.","A type of computer mouse.", "A fast way to type."], a:1},
+            {q: "What does 'WWW' stand for in a website address?", o:["World Wide Weapon", "Wild West Web", "World Wide Web", "World Wide Wireless"], a:2},
+            {q: "Which of these is used to store data even when the computer is turned off?", o:["Hard Drive", "RAM", "Processor", "Power Supply"], a:0},
+            {q: "What is the main purpose of an 'Antivirus' Program?", o:["To make the computer type faster.", "To play video games", "To protect the computer from harmful software and hackers.", "To clean the dust off the screeen"], a:2},
+            {q: "What is the process of finding and fixing errors in a computer program called?", o:["Coding", "Debugging", "Scanning", "Logging"], a1:1},           
+            {q: "What do we call the physical parts of a computer that you can touch?", o:["Software", "Hardware", "malware", "Cloud"], a:1},
+            {q: "in a 'Binary' system, computers use only two digits to represent data. What are they?", o:["1 and 2", "A and B", "0 and 1", "5 and 10"], a:2},
+            {q: "Which key on the keyboard allows you to move to a new line when typing?", o:["Spacebar", "Shift", "Escape", "Enter"], a:3},
+        ]
+    },
+    senior: {
+        AdvancedScience:[
+                {q: "Which principle states that two identical fermions cannot occupy the same quantum state simultaneously?", 
+                o:["Heisenberg Uncertainty Principle", "Pauli Exclusion Principle", "Aufbau Principle", "Hund's Rule"], a:1},
+                {q: "In an SN2 reaction, what happens to the stereochemistry of a chiral center?", 
+                o:["It remains the same (Retention).", "It forms a 50/50 racemic mixture.", "It is inverted (Walden Inversion).", "The chiral center is destroyed."], a:2},
+                {q: "Which DNA repair mechanism is specifically responsible for fixing thymine dimers caused by UV radiation?",
+                 o:["Mismatch Repair (MMR)", "Base Excision Repair (BER)", "Nucleotide Excision Repair (NER)", "Homologous Recombination"],a:2},
+                {q: "A process that occurs without any heat transfer between a system and its surroundings is called:", 
+                o:["Isothermal", "Isobaric", "Isochoric", "Adiabatic",], a:3},
+                {q: "Which particle is known as the 'force carrier' for the electromagnetic interaction?",
+                o:["Gluon", "W-Boson", "Graviton", "Photon"], a:3},
+                {q: "In CRISPR-Cas9 technology, what is the role of the 'guide RNA' (gRNA)?", 
+                o:["It acts as the molecular 'scissors' to cut the DNA.", "t provides the template for DNA repair.", 
+                "It directs the Cas9 enzyme to a specific target sequence in the genome.", "It prevents the DNA from re-annealing."], a:2},
+                {q: "Which neurotransmitter is primarily involved in the 'reward' pathway and motor control?",
+                 o:["Serotonin", "Acetylcholine", "Dopamine", "GABA"], a:2},
+                {q: "According to Einstein, gravity is not a 'force' in the traditional sense, but rather:", 
+                o:["An electromagnetic wave", "The result of the Higgs field.", "The curvature of space-time caused by mass and energy.", "A flow of subatomic particles called gravitons."], a:2},
+                {q: "In Chromatography, the 'Retention Factor' (Rf) is calculated as:", o:["Distance traveled by solvent / Distance traveled by substance",
+                    "Distance traveled by substance / Distance traveled by solvent", "Concentration of solute / Concentration of solvent", "Temperature / Pressure"], a:1},
+                {q: "Which part of the human body is often called the 'powerhouse' because it creates energy?", o:["Nucleus", "Ribosome", "Mitochondria", "Cytoplasm"], a:2},
+    ],
+      Economics: [
+  {q: "What is the primary reason why we must make choices in an economy?", o: ["Abundance", "Scarcity", "Surplus", "Inflation"], a: 1 },
+  {q: "If the price of a product increases, what usually happens to the 'Quantity Demanded'?", o: ["It increases", "It stays the same", "It decreases", "It doubles"], a: 2 },
+  {q: "Which of these is a 'Fixed Expense' in a monthly budget?",  o: ["Grocery bills", "Entertainment", "Rent or Mortgage", "Clothing"], a: 2 },
+  {q: "What is 'Inflation'?", o: ["The rise in the general level of prices over time", "A decrease in the money supply", "The total value of all goods produced", "A type of stock market tax"],  a: 0 },
+  {q: "What is the main purpose of a 'Bank Account'?", o: ["To print new currency", "To store money safely and earn interest", "To control the national debt", "To buy government bonds"], a: 1 },
+  {q: "In a 'Market Economy', who primarily determines the prices of goods?", o: ["The Government", "The Central Bank", "Buyers and Sellers", "A single corporation"], a: 2 },
+  {q: "What does 'GDP' stand for in economics?", o: ["Gross Domestic Product", "General Deposit Plan", "Global Debt Percent", "Government Dividend Policy"], a: 0 },
+  {q: "What is 'Diversification' in investing?", o: ["Investing all money into one stock", "Spreading investments across different assets to reduce risk", "Withdrawing all money from the bank", "Borrowing money to buy luxury items"], a: 1 },
+  {q: "What is an 'Opportunity Cost'?", o: ["The total cost of production", "The value of the next best alternative given up", "A discount offered by sellers", "The tax paid on a purchase"], a: 1 },
+  {q: "What is a 'Budget Deficit'?", o: ["When spending is less than income", "When income and spending are equal", "When spending exceeds income", "When the stock market crashes"], a: 2 }
+],
+      Tech:[
+        {q: "What is a common term for a data point that is significantly different from the rest of the observations in a dataset?", 
+        o:["Insider", "Oulier", "Extreme", "Error"], a:1},
+        {q: "Which of the following is an example of 'Unsupervised Learning'?", o:["Predicting house prices based on square footage.",
+            "Classifying emails as Spam or Not Spam.","Clustering customers into groups based on purchasing behavior without prior labels.",
+        "Training a self-driving car using human-labeled video frames."], a:2},
+        {q: "In a dataset, a column containing 'True' or 'False' values is known as what data type?", o:["nteger", "String", "Float", "Boolean"], a:3},
+        {q: "What does the 'GPT' in ChatGPT stand for?", 
+        o:["General Programmed Technician", "Generative Pre-trained Transformer", "Global Processing Tool", "Google Python Terminal"], a:1},
+        {q: "Which type of chart is best for showing the relationship or correlation between two numerical variables?", 
+        o:["Pie Chart", "Bar Chart", "Scatter Plot", "Histogram"], a:2},
+        {q: "What is a 'chatbot' trying to pass if it aims to exhibit behavior indistinguishable from a human?", 
+        o:["The Turing Test", "The Einstein Exam", "The Silicon Challenge", "The Binary Bar"], a:0},
+        {q: "Which programming language is the most popular for Data Science due to its readability and large library support?", 
+        o:["HTML", "Python", "C++", "JavaScript"], a:1},
+        {q: "In the '3 Vs' of Big Data, we have Volume and Variety. What is the third 'V'?", o:["Validity", "Velocity", "victory", "Visibility"], a:1},
+        {q: "Which algorithm is often used to predict a numerical value (like a house price) based on input features?", o:["Linear Regression", 
+        "K-Means Clustering", "Facial Recognition", "Sorting"], a:0},
+        {q: "Which type of AI is designed to genearte new content, such as text, images, or music?", o:["Supervised Learning", "Generative AI", "Reinforcement Learning", "Linear Regression"], a:1},
+      ],
+      Law:[
+        {q: "Which system of government is characterized by a single leader or small group holding absolute power with little to no constitutional limitations?",
+         o:["Democracy", "Republic", "Authoritarianism", "Federalism"], a:2},
+        {q: "Which legal tradition, used in most of the United States and the UK, relies heavily on judicial precedents and 'judge-made' law?", 
+        o:["Civil Law", "Common Law", "Sharia Law", "Canonical Law"], a:1},
+        {q: "The principle that a state has the power to govern itself without interference from outside bodies is known as:", 
+        o:["Diplomacy", "Globalism", "Sovereignty", "Hegemony"], a:2},
+        {q: "What is the primary purpose of a 'Bill of Rights' in a constitution?", o:["To outline the salaries of government officials.",
+         "To define the borders of the country.", "To protect individual liberties against government overreach.", "To establish a national religion."], a:2},
+        {q: "In a 'Separation of Powers' model, which branch is responsible for interpreting the law and determining its constitutionality?", 
+        o:["Legislative Branch", "Executive Branch", "Judicial Branch", "Bureaucratic Branch"], a:2},
+        {q: "What is the legal term for the principle that a person is considered 'innocent until proven guilty'?",
+         o:["Habeas Corpus", "Double Jeopardy", "The Presumption of Innocence", "Due Process"], a:2},
+        {q: "Which famous philosopher is known for the 'Social Contract' theory, suggesting people give up some freedoms to a government in exchange for protection?", 
+        o:["Socrates", "Thomas Hobbes", "Karl Marx", "Friedrich Nietzsche"], a:1},
+        {q: "In a civil lawsuit (such as a contract dispute), the person or party who files the complaint is called the:", 
+        o:["Defendant", "Prosecutor", "Plaintiff", "Bailiff"], a:2},
+        {q: "A 'Proportional Representation' voting system is one where:", o:["The candidate with the most votes wins the entire district.",
+        "Parties gain seats in proportion to the number of votes they receive.", "Only two parties are allowed to compete.",
+         "The leader is chosen by a monarch."], a:1},
+        {q: "The 'Universal Declaration of Human Rights' (1948) was adopted by which international organization?", 
+        o:["The World Bank", "The European Union", "The United Nations", "The Red Cross"], a:2},
+        
+      ]
+    }
+};
+   
+
+    let activeQuestions = [];
+    let currentQ = 0;
+    let score = 0;
+    let timeLeft = 300;
+    let timerInterval;
+    let selectedIdx = null;
+    let userAnswers = [];
+
+    function StartQuiz() {
+        const params = new URLSearchParams(window.location.search);
+        const age = params.get('age') || 'junior';
+        const sub = params.get('subject') || 'GK';
+        activeQuestions = (questions[age] && questions[age][sub]) ? questions[age][sub] : [];
+        if (activeQuestions.length > 0) { loadQuestion(); startTimer(); }
+    }
+
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            if (timeLeft <= 0) { showResult(); return; }
+            timeLeft--;
+            let min = Math.floor(timeLeft / 60);
+            let sec = timeLeft % 60;
+            document.getElementById('timer').innerText = `${min}:${sec < 10 ? '0' : ''}${sec}`;
+        }, 1000);
+    }
+
+    function loadQuestion() {
+        selectedIdx = null;
+        const data = activeQuestions[currentQ];
+        document.getElementById('qs-content').innerText = `Question ${currentQ + 1} of ${activeQuestions.length}`;
+        document.querySelector('.qs-text').innerText = data.q;
+        const div = document.getElementById('options');
+        div.innerHTML = "";
+        data.o.forEach((opt, i) => {
+            const btn = document.createElement('button');
+            btn.className = "option-btn";
+            btn.innerText = opt;
+            btn.onclick = () => {  selectOption(btn, i); };
+            div.appendChild(btn);
+        });
+    }
+
+    function selectOption(btn, i) {
+        document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedIdx = i;
+    }
+
+    function submitAnswer() {
+        if (selectedIdx === null) { alert("Select an option!"); return; }
+        const correct = activeQuestions[currentQ].a;
+        if (selectedIdx === correct) { score++; }
+        userAnswers.push({
+            q: activeQuestions[currentQ].q,
+            user: activeQuestions[currentQ].o[selectedIdx],
+            correct: activeQuestions[currentQ].o[correct],
+            isRight: selectedIdx === correct
+        });
+        currentQ++;
+        if (currentQ < activeQuestions.length) loadQuestion(); else showResult();
+    }
+
+    function showResult() {
+        clearInterval(timerInterval);
+        document.getElementById('quiz-box').classList.add('hidden');
+        document.getElementById('result').classList.remove('hidden');
+        document.getElementById('final-score').innerText = `Score: ${score}/${activeQuestions.length}`;
+        document.getElementById('review-list').innerHTML = userAnswers.map((ans, i) => `
+            <div style="margin-bottom:10px; border-bottom:1px solid #666; padding-bottom: 5px;">
+                <strong>Q${i+1}:</strong> ${ans.q}<br>
+                <span style="color:${ans.isRight ? '#2ecc71' : '#e74c3c'}">
+                    ${ans.isRight ? '✓ Correct' : '✗ Picked: '+ans.user+' | Ans: '+ans.correct}
+                </span>
+            </div>`).join('');
+        revealStars();
+    }
+
+    function revealStars() {
+        const starIds = ['star1', 'star2', 'star3'];
+        starIds.forEach((id, i) => {
+            setTimeout(() => {
+                const s = document.getElementById(id);
+                s.classList.add('animate');
+                let glow = (i===0 && score>0) || (i===1 && score >= activeQuestions.length/2) || (i===2 && score === activeQuestions.length);
+                if (glow) { s.classList.add('glow');  }
+            }, i * 600);
+        });
+    }
+
+    function toggleReview() {
+        const list = document.getElementById('review-list');
+        list.classList.toggle('hidden');
+      
+    }
+    function changeSubject() {
+    const params = new URLSearchParams(window.location.search);
+   
+    const ageGroup = params.get('age'); 
+    if (ageGroup) {
+        window.location.href = "subjects.html?group=" + ageGroup;
+    } else {
+        window.location.href = "age.html";
+    }
+}
+window.addEventListener('load', function() {
+        const displayName = document.getElementById('display-name');
+        const savedName = localStorage.getItem('quizUserName');
+
+        if (savedName && displayName) {
+            displayName.innerText = savedName;
+        }
+
+   });
+    window.onload = StartQuiz;
+</script>
+</body>
+</html>

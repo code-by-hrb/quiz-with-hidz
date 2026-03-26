@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    position: relative; /* Required for the blur layer */
+    overflow: hidden;
+}
+
+/* This creates the blurred background layer */
+body::before {
+    content: "";
+    position: fixed; /* Keeps it in place while scrolling */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://static.vecteezy.com/system/resources/thumbnails/043/732/088/small_2x/question-mark-particle-appear-slow-float-and-faded-with-bubbles-on-the-dark-blue-background-free-video.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: blur(8px);
+    background-color: rgba(65, 64, 64, 0.5); 
+    background-blend-mode: darken;
+    z-index: -1; 
+    transform: scale(1.1);
+}
+
+.nav-container{
+    background-color: transparent;
+    padding:10px;
+    text-align:center;
+}
+h1.title{
+    text-shadow: 2px 2px 4px  rgba(0,0, 0.7 );
+    letter-spacing:2px;
+    font-family:'Pacifico', cursive;
+    letter-spacing: 3px;
+    font-size: 3rem;
+}
+.floating-text{
+    animation: float 3s ease-in-out infinite;
+    text-align: center;
+    color: white;
+    font-size:1.4rem;
+    margin: 20px 0;
+}
+@keyframes float{
+    0% {transform: translateY(0px);}
+    50% {transform: translateY(-15px);}
+    100% {transform: translateY(0px);}
+}
+nav{
+    text-align: center;
+    border: 1px solid rgb(255, 255, 255);
+    padding-top: 7px;
+    padding-bottom: 5px;
+    margin-top:1px;
+}
+div{
+    text-align: center;
+    background-color: transparent;
+}
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 50px;
+    background-color:transparent; 
+    min-height: auto;
+    flex-grow:1;
+}
+.image-container img{
+    width:250px;
+    height:190px;
+    margin-bottom: 30px;
+    display: block;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    border:3px solid rgb(255, 255, 255);
+
+}
+BUTTON{
+    background-color: rgba(3, 3, 102, 0.692);
+    color:aliceblue;
+    padding:14px 20px;
+    margin:8px 0;
+    border:2px solid rgb(255, 255, 255);
+    cursor: pointer;
+    width:30%;
+    margin-bottom: 20px; 
+    width: 250px;
+    font-size: larger;
+     letter-spacing:2px;
+}
+button:hover{
+    opacity: 0.8;
+}

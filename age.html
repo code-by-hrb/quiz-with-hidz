@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Age Group- Quiz With Hidz</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" >
+</head>
+<style>
+    *{
+        margin: 0;
+        padding:0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+ body{
+        background-image:url('https://static.vecteezy.com/system/resources/thumbnails/043/732/088/small_2x/question-mark-particle-appear-slow-float-and-faded-with-bubbles-on-the-dark-blue-background-free-video.jpg') ;
+   height:100%;
+    width:100%;
+     background-repeat:no-repeat;
+     background-position:center;
+     background-attachment: fixed;
+     margin:0;
+     color:white;
+      background-size:cover;
+      filter: brightness(100%) contrast(115%);
+      image-rendering: smooth;
+      align-items:center;
+      display: flex;
+      text-align: center;
+    
+      justify-content: center;
+ }
+    .config-card{
+        background-color:#123456;
+        text-align: center;
+        width: 750px;
+        height: 450px;;
+        padding:40px;
+        border-radius:20px;
+        box-shadow:0 10px 30px rgba(0,0,0,0.05);
+        margin-top:100px;
+        margin-bottom: 50px;
+        box-shadow: 0 0 5px rgb(3, 3, 99), 0 0 10px navy, 0 0 15px navy, 0 0 20px navy;
+    }
+    .title {
+        font-weight: 700;
+        font-size:30px;
+        line-height:1.2;
+        margin-bottom:10px;
+        border-style: solid;
+        border-color: paleturquoise;
+        border-width: 2.5px;
+        border-left: 0.3;
+        border-right:0.3;
+        padding:15px;
+        border-radius: 12px;
+        margin-top:5px;
+        box-shadow:0 0 5px white, 0 0 10px white, 0 0 20px white, 0 0 30px white;
+    }
+    .section h2{
+        color:aquamarine;
+        font-weight:530;
+        font-size:26px;
+        margin-bottom:15px;
+        margin-top:25px;
+        text-align: center;
+    }
+    .section p{
+        color:lightpink;
+        font-weight: 450;
+        font-size:20px;
+        margin-bottom: 15px;
+        text-align:center;
+    }
+    .section{
+        text-align:left;
+        margin-bottom: 20px;
+        margin-top:20px;
+    }
+    .options-container{
+        display: flex;
+        gap:15px;
+    }
+    .age-box{
+        background-color:transparent;
+        padding:30px 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size:13px;
+        display: flex;
+        flex:1;
+        padding:25px;
+        background: #fff;
+        border-radius: 12px;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        border: 2px solid #5d5fef; 
+    }
+    .age-box:hover{
+        transform:translateY(-5px);
+        background: #fff;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);   
+    }
+    .junior{
+        color: #2ecc71;
+        font-size:23px;
+    }
+    .junior p{
+        color:black;
+        font-size:20px;
+    }
+    .intermediate{
+        color: #e67e22;
+        font-size: 25px;
+    }
+    .intermediate p{
+        color:black;
+        font-size:20px;
+    }
+    .senior{
+        color:#9b59b6;
+        font-size: 25px;
+    }
+    .senior p{
+        color:black;
+        font-size:20px;
+    }
+    .button {
+        border-color:lightcyan ;
+    }
+    .age-range{
+        font-size:20px;
+        margin-top: 0px;
+        font-weight: 500px;
+        opacity:1.5;
+    }
+    .age-box.junior:hover{
+        border-color:#2ecc71;
+        box-shadow:0 10px 20px rgba(46, 204, 113, 0.2), 0 0 15px rgba(46, 204, 113, 0.1);
+    }
+    .age-box.intermediate:hover{
+        border-color:#e67e22;
+        box-shadow:0 10px 20px rgba(230, 126, 34, 0.2), 0 0 15px rgba(230, 126, 34, 0.1);
+    }
+    .age-box.senior:hover{
+        border-color:#9b59b6;
+        box-shadow: 0 10px 20px rgba(155, 89, 182, 0.2), 0 0 15px rgba(155, 89, 182, 0.1);
+    }
+    .home-icon{
+        position: absolute;
+        top:20px;
+        right:20px;
+        text-decoration: none;
+        transition:transform 0.3s ease;
+    }
+    .home-icon:hover{
+        transform:scale(1.2);
+    }
+    .house-shape{
+        width:25px;
+        height:20px;
+        background: whitesmoke;
+        position: relative;
+        border-radius: 2px;
+    }
+    .house-shape::before{
+        content:'';
+        position:absolute;
+        top:-10px;
+        left:-1px;
+        width:0;
+        height:0;
+        border-left:13px solid transparent;
+        border-right: 13px solid transparent;
+        border-bottom: 11px solid whitesmoke;
+
+    }
+    .user-display {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    z-index: 2000; /* Ensures it stays on top */
+}
+    </style>
+<body>
+    <div id="user-display" style="position: fixed; top: 10px; left: 10px; color: white; background: rgba(0,0,0,0.5); padding: 5px 15px; border-radius: 20px; font-weight: bold; z-index: 9999;">
+    👤 <span id="display-name">Guest</span>
+</div>
+
+<script>
+    window.addEventListener('load', function() {
+        const displayName = document.getElementById('display-name');
+        const savedName = localStorage.getItem('quizUserName');
+
+        if (savedName && displayName) {
+            displayName.innerText = savedName;
+        }
+    });
+</script>
+
+    
+    <div class="config-card">
+        <a href="login.html" class="home-icon" title="Go To Login">
+            <div class="house-shape"></div></a>
+        </a>
+            <h1 class="title">QUIZ WITH HIDZ</h1>
+            <div class="section">
+            <h2> Select Age Group</h2>
+            <p> Choose Difficulty Level To Customize Your Experience.</p>
+        </div>
+        <div class="options-container">
+            <button class="age-box junior" onclick="window.location.href='subjects.html?group=junior'">
+                <strong> Junior</strong>
+               <br> <p class="age-range"> (6-10)</p>
+            </button>
+            <button class="age-box intermediate" onclick="window.location.href='subjects.html?group=intermediate'">
+                <strong>Intermediate </strong>
+               <br> <p class="age-range"> (11-17)</p>
+            </button>
+            <button class="age-box senior" onclick="window.location.href='subjects.html?group=senior'">
+                <strong> Senior</strong>
+                <br><p class="age-range"> (18+)</p>
+            </button>
+        
+        </div>
+    </div>
+ 
+</body>
+</html>

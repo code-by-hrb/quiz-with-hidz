@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>select Subject-Quiz with Hidz</title>
+</head>
+<style>
+    body{
+      background-image:url('https://static.vecteezy.com/system/resources/thumbnails/043/732/088/small_2x/question-mark-particle-appear-slow-float-and-faded-with-bubbles-on-the-dark-blue-background-free-video.jpg');
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-repeat: no-repeat ;
+      height:100%;
+      width:100%;
+      background-size:cover ;
+    }
+    .config-card{
+       background:rgb(228, 228, 248);
+       width:450px;
+       padding: 30px;
+       border-radius:20px;
+       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+       text-align: center;
+    }
+    .title{
+        color:#123456;
+        font-size: 24px;
+         border-color: darkblue;
+         border-style:solid;
+        border-width: 5px;
+        border-left: 0.3;
+        border-right:0.3;
+        padding:15px;
+        border-radius: 12px;
+        margin-top: 3px;
+        box-shadow:0 0 5px white, 0 0 10px white, 0 0 20px white, 0 0 30px white;
+    margin-bottom: 2px; 
+   }
+   .sub-title {
+    font-size: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 1px solid #eee;
+   }
+   .sub-btn{
+    width:100%;
+    padding: 15px;
+    margin-bottom: 12px;
+    background: transparent;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight:600;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+   }
+   .sub-btn:hover{
+    border-color: #5d5fef;
+    background-color: #f8f9ff;
+    transform:translateY(-2px);
+   }
+   .back-btn{
+    font-size:15px;
+    padding: 12px;
+    margin-top:20px;
+    margin-bottom: 10px;
+    color:black;
+    background-color:lawngreen;
+    cursor:pointer;
+}
+.user-display {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    z-index: 2000; /* Ensures it stays on top */
+}
+.house-shape {
+    width: 25px;
+    height: 20px;
+    background: whitesmoke;
+    border-radius: 2px;
+    
+    /* Position it in the Top Right */
+    position: fixed; 
+    top: 25px;      /* Distance from top */
+    right: 25px;    /* Distance from right */
+    
+    z-index: 100;   /* Keeps it above all other layers */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+/* Your roof code stays the same */
+.house-shape::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -1px;
+    width: 0;
+    height: 0;
+    border-left: 13px solid transparent;
+    border-right: 13px solid transparent;
+    border-bottom: 11px solid whitesmoke;
+}
+
+.house-shape:hover {
+    transform: scale(1.2);
+}
+    </style>
+<body onload="checkagegroup()">
+
+        <a href="login.html" class="home-icon" title="Go To Login">
+            <div class="house-shape"></div></a>
+        </a>
+    <div id="user-name-tag" class="user-display">👤 <span id="display-name">Guest</span></div>
+<div class="config-card"> <h1 class="title"> QUIZ WITH HIDZ:</h1><BR><h3> Subject Selection</h3>
+<p class="sub-title">Choose Your Subject To Begin The Challenge.</p>
+<div id="junior-card" class="sub-select-card" style="display:none">
+    <h2 class="section-title" style="color:#2ecc71">Junior Subjects (Age 6-10) </h2>
+    <div class="options">
+        <button class="sub-btn" onclick="startquiz('GK')"> General Knowledge (GK)</button>
+        <button class="sub-btn" onclick="startquiz('Maths')"> Basic Maths</button>
+        <button class="sub-btn" onclick="startquiz('Science')"> General Science</button>
+        <button class="sub-btn" onclick="startquiz('Fun') "> Fun & Pop Culture</button>
+    </div>
+</div>
+<div id="intermediate-card" class="sub-select-card" style="display: none;">
+    <h2 class="section-title" style="color:#e67e22"> Intermediate Subjects Age(11-17)</h2>
+    <div class="options">
+        <button class="sub-btn" onclick="startquiz('GK')">General Knowledge (GK) </button>
+        <button class="sub-btn" onclick="startquiz('Maths')"> Mathematics</button> 
+        <button class="sub-btn" onclick="startquiz('Science')">General Science</button>
+        <button class="sub-btn" onclick="startquiz('SocialStudies')"> Social Studies</button>
+        <button class="sub-btn" onclick="startquiz('Computer')">Computer Science </button>
+</div>
+ </div>
+ <div id="Senior-card" class="sub-select-card" style="display: none;">
+    <h2 class="section-title"  style="color:#9b59b6"> Senior Subjects Age(18+)</h2>
+    <div class="options">
+        <button class="sub-btn" onclick="startquiz('AdvancedScience')"> Advanced Sciences</button>
+        <button class="sub-btn" onclick="startquiz('Economics')"> Economics & Finance</button>
+        <button class="sub-btn" onclick="startquiz('Tech')"> Data Science & AI</button>
+        <button class="sub-btn" onclick="startquiz('Law')">Political Science & Law </button>
+    </div>
+ </div>
+ <button class="back-btn" onclick="window.location.href='age.html'"><b> Change Age Group </b> </button>
+    </div>
+    <script>
+       
+        function checkagegroup(){
+            const params=new URLSearchParams(window.location.search);
+            const group=params.get('group');
+            if (group==='junior'){
+                document.getElementById('junior-card').style.display='block';
+            }
+            else if(group==='intermediate'){
+                document.getElementById('intermediate-card').style.display='block';
+            }
+            else if (group==='senior'){
+                document.getElementById('Senior-card').style.display='block';
+            }
+        }
+        function startquiz(subject){
+            const params= new URLSearchParams(window.location.search);
+            const group=params.get('group');
+            alert("Starting "+ subject +" Quiz!");
+            window.location.href="QuizPanel.html?subject=" + subject +"&age=" + group;
+        }
+    
+    window.addEventListener('load', function() {
+        const displayName = document.getElementById('display-name');
+        const savedName = localStorage.getItem('quizUserName');
+
+        if (savedName && displayName) {
+            displayName.innerText = savedName;
+        }
+    });
+        </script>
+
+</body>
+</html>
