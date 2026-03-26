@@ -15,9 +15,6 @@
     flex-direction: column;
     overflow-x: hidden; 
     overflow-y: auto;
-    justify-content:space-between;
-    position: relative; /* Required for the blur layer */
-    overflow: hidden;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -27,7 +24,6 @@
     max-width: 800px; 
     margin: 0 auto;
     padding: 20px;
-    text-align: center;
 }
 
 /* This creates the blurred background layer */
@@ -48,34 +44,41 @@ body::before {
     z-index: -1; 
     transform: scale(1.1);
 }
- div{
-    height:50px;
-    width:100%;
-    padding-bottom:0.5px;  
- }
+.header-box {
+    background-color: lightblue;
+    text-align: center;
+    color: black;
+    padding: 10px;
+    width: 100%;
+}
  p{
     color:white;
     text-align: left;
     font-size:18px;
-    font-family:cursive;
+    font-family: Georgia, serif;
+    line-height: 1.6;
  }
- .about div{
-    display:flex;
-    flex-direction: column;
-    min-height: 100%;
+h2 {
+ font-size: 24px; /* Slightly smaller for mobile screens */
+ margin-top: 20px;
+}
 
-
- }
+ul li {
+    margin-bottom: 15px; /* Adds space between list items */
+}
 </style>
-<body><div style="background-color: lightblue; text-align: center; font: weight 500px;; color:black"> 
+<body>
+<div class="header-box"> <marquee> <h1 style="font-family:Georgia; letter-spacing: 2px; color:navy; margin:0;">
+Making Knowledge Accessible & Fun</h1></marquee>
+</div>
 <div class="content-wrapper">
-<div class="about"><marquee> <h1 style="font-family:Georgia, 'Times New Roman', Times, serif; letter-spacing: 3px; color:navy; text-align: center; padding-bottom:5px;"> Making Knowledge Accessible & Fun </h1></marquee></div>
-<h2 style="text-align: left; color:whitesmoke; font-size: 30px; margin-top:30px;"><U>OUR MISSION:</U></h2>
-<p style="font-size: 22px; font-family:Georgia, 'Times New Roman', Times, serif ;"> Traditional Quiz systems often rely on manual, paper-based tests or static documents that lack management and accessibility.<br> Our Mission is to modernize this process this process by providing a <b>user-friendly, responsive interface</b> that makes learning interactive and efficient.</p>
-<h2 style="text-align: left; color:whitesmoke; font-size: 30px; padding:4px;"><U>OUR KEY FEATURES:</U></h2>
-<P style="text-align: left; color:whitesmoke; font-size: 22px; line-height: 4px;"> <ul style="text-align: left; color:whitesmoke; font-size: 22px; font-family: Georgia, 'Times New Roman', Times, serif;"> <li><b> <u>Age-Appropriate Content:</u></b> Users can select their age specific age group to ensure the quiz subjects are relevant to their level.</li>
+<h2 style="text-align: left; color:whitesmoke;"><U>OUR MISSION:</U></h2>
+<p> Traditional Quiz systems often rely on manual, paper-based tests or static documents that lack management and accessibility.<br> Our Mission is to modernize this process this process by providing a <b>user-friendly, responsive interface</b> that makes learning interactive and efficient.</p>
+<h2 style="color:whitesmoke"><U>OUR KEY FEATURES:</U></h2>
+<ul style="color:whitesmoke; font-size: 18px; font-family: Georgia; text-align: left;">
+<li><b> <u>Age-Appropriate Content:</u></b> Users can select their age specific age group to ensure the quiz subjects are relevant to their level.</li>
 <li> <b><u> Dynamic Subject Selection:</u> </b>  Available subjects are automatically adjusted based on the user's selected age group.</li>
 <li> <b><u>Time Managemnt:</u></b>  To encourage focus, each quiz consists of 10 Multiple Choice Questiobns (MCQs) thst must be completed within 5-minute timer.</li>
-<li> <b><u>Immediate Feedback:</u></b>  We eliminate the "delayed evaluation" found in manual scoring. <br>Results and scores are calculated instantly upon submission providing users with immediate perfomance records.</li></ul></P>
-</div><div></body>
+<li> <b><u>Immediate Feedback:</u></b>  We eliminate the "delayed evaluation" found in manual scoring. <br>Results and scores are calculated instantly upon submission providing users with immediate perfomance records.</li></ul>
+</div></body>
 </html>
