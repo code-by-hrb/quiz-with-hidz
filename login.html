@@ -14,27 +14,31 @@
         min-height: 100vh;
         background-color:#050a18;
         font-family: 'Seoge UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+       padding:20px;
+       box-sizing: border-box;
+}
+    
 .login-card{
     display: flex;
-    height:85vh;
+    height:80vh;
     background: #fff;
-    width: 90%;
-    max-width: 1000px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    width: 94%;
+    max-height: 700px;
+    max-width: 1200px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
     overflow:hidden;
     border-radius: 15px;
 }
-    @media (max-width: 768px) {
+    @media (max-width: 850px) {
     .login-card {
         flex-direction: column;
         height: auto;
-        margin: 20px 0;
+        max-height: none;
+        width: 100%;
     }
     
     .left-panel {
-        padding: 40px 20px;
-        min-height: 200px; 
+        height: 200px;
     }
 
     .left-panel h1 {
@@ -42,12 +46,12 @@
     }
 
     .right-panel {
-        padding: 20px;
+        padding: 30px 20px;
     }
 }
 .left-panel{
     flex:1.2;
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
     url('https://thumbs.dreamstime.com/b/brain-bulb-ai-generated-image-289682737.jpg');
    background-position:center;
     display: flex;
@@ -66,8 +70,8 @@
 .left-panel h1{
     font-size: 2.5rem;
     letter-spacing: 2px;
-    margin-top: 15px;
-    font-weight:300px
+    margin-top:0px;
+    font-weight:300;
 }
 .left-panel p{
     font-size:1.5rem ;
@@ -79,20 +83,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 40px;
     overflow-y: auto;
+    background: #ffffff;
 }
 .form-container{
     width:100%;
     max-width: 320px;
-    padding:20px;
 }
 .form-container h2{
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     margin-left: 36px;
     text-align: center;
     color:#333;
-    font-weight: 600px;
+    font-weight: 600;
     font-size: 26px;
 }
 .input{
@@ -108,7 +112,7 @@
     border-radius: 8px;
     box-sizing: border-box;
 }
-.inout input:focus{
+.input input:focus{
     border-color: #ff6b00;
 }
 .login-btn{
@@ -118,13 +122,14 @@
     border:none;
     border-radius: 5px;
     color:white;
-    font-weight: 600px;
-    font-size: 15px;
+    font-weight: 600;
+    font-size: 16px;
     cursor: pointer;
     margin-top: 10px;
     margin-left: 10px;
+    transition: background 0.3s;
 }
-.login-btn hover{
+.login-btn:hover{
     background: #e65a00;
 }
 .forgot-pass{
