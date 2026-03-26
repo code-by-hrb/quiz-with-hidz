@@ -19,9 +19,31 @@
     display: flex;
     height:650px;
     background: #fff;
-    width: 1500px;
+    width: 90%;
+    max-width: 1000px;
     box-shadow: 0 15px 35px rgba(0,0,0,0.2);
     overflow:hidden;
+    border-radius: 15px;
+}
+    @media (max-width: 768px) {
+    .login-card {
+        flex-direction: column; /* Stacks the panels */
+        height: auto; /* Allows height to grow as needed */
+        margin: 20px 0;
+    }
+    
+    .left-panel {
+        padding: 40px 20px;
+        min-height: 200px; 
+    }
+
+    .left-panel h1 {
+        font-size: 1.8rem;
+    }
+
+    .right-panel {
+        padding: 20px;
+    }
 }
 .left-panel{
     flex:1;
@@ -145,7 +167,7 @@
             window.location.href="age.html";
         }
         else{
-            alert("Please Fill In Both Email And  Password.");
+            alert("Please Fill In Your Name, Email And  Password.");
         }
         });
   
