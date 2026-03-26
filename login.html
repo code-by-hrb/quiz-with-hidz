@@ -12,12 +12,12 @@
         justify-content:center ;
         align-items: center;
         min-height: 100vh;
-        background-color: #d1d8e0;
+        background-color: #050a18;;
         font-family: 'Seoge UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 .login-card{
     display: flex;
-    height:650px;
+    height:85vh;
     background: #fff;
     width: 90%;
     max-width: 1000px;
@@ -27,8 +27,8 @@
 }
     @media (max-width: 768px) {
     .login-card {
-        flex-direction: row;
-        height: auto; /* Allows height to grow as needed */
+        flex-direction: column;
+        height: auto;
         margin: 20px 0;
     }
     
@@ -79,7 +79,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px;
+    padding: 20px;
+    overflow-y: auto;
 }
 .form-container{
     width:100%;
@@ -102,9 +103,10 @@
 }
 .input input{
     width:100%;
-    padding: 20px 15px;
+    padding: 12px 15px;
     border:1px solid #ddd;
     border-radius: 8px;
+    box-sizing: border-box;
 }
 .inout input:focus{
     border-color: #ff6b00;
