@@ -7,12 +7,12 @@ body {
     color: white;
     display: flex;
     flex-direction: column;
-    justify-content:space-between;
-    position: relative; /* Required for the blur layer */
+    justify-content:flex-start;
+    position: relative; 
     overflow: hidden;
+    box-sizing: border-box;
 }
 
-/* This creates the blurred background layer */
 body::before {
     content: "";
     position: fixed; /* Keeps it in place while scrolling */
@@ -47,8 +47,8 @@ h1.title{
     animation: float 3s ease-in-out infinite;
     text-align: center;
     color: white;
-    font-size:1.4rem;
-    margin: 20px 0;
+    font-size:1.3rem;
+    margin: 10px 0;
 }
 @keyframes float{
     0% {transform: translateY(0px);}
@@ -71,15 +71,15 @@ div{
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin-top: 50px;
+    margin-top: 10px;
     background-color:transparent; 
     min-height: auto;
     flex-grow:1;
 }
 .image-container img{
-    width:250px;
-    height:190px;
-    margin-bottom: 30px;
+    width:220px;
+    height:160px;
+    margin-bottom: 20px;
     display: block;
     border-radius: 50%;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
@@ -89,13 +89,13 @@ div{
 BUTTON{
     background-color: rgba(3, 3, 102, 0.692);
     color:aliceblue;
-    padding:14px 20px;
+    padding:12px 20px;
     margin:8px 0;
     border:2px solid rgb(255, 255, 255);
     cursor: pointer;
     width:30%;
     margin-bottom: 20px; 
-    width: 250px;
+    width: 220px;
     font-size: larger;
      letter-spacing:2px;
 }
