@@ -10,6 +10,8 @@ body {
     justify-content:space-between;
     position: relative; /* Required for the blur layer */
     overflow: hidden;
+    overflow-y: auto; 
+    overflow-x: hidden;
 }
 
 /* This creates the blurred background layer */
