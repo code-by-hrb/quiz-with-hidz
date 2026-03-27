@@ -34,8 +34,9 @@ body::before {
 }
 
 .nav-container{
-    height: 45vh;
+    height: 20vh;
     display:flex;
+    flex-direction: column;
     justify-content:center;
     background-color: transparent;
     padding:10px;
@@ -55,6 +56,11 @@ h1.title{
     color: white;
     font-size:1.4rem;
     margin: 20px 0;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 @keyframes float{
     0% {transform: translateY(0px);}
@@ -77,14 +83,14 @@ div{
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin-top: 50px;
+    margin-top: 20px;
     background-color:transparent; 
     min-height: auto;
-    flex-grow:1;
+    justify-content:center;
 }
 .image-container img{
     width:auto;
-    height:40px;
+    height:38px;
     margin-bottom: 30px;
     display: block;
     border-radius: 50%;
@@ -101,13 +107,22 @@ BUTTON{
     border:2px solid rgb(255, 255, 255);
     cursor: pointer;
     width:30%;
-    height:50px;
     margin-top:10px;
     margin-bottom: 20px; 
     width: 220px;
     font-size: larger;
      letter-spacing:2px;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 button:hover{
     opacity: 0.8;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
