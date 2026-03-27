@@ -2,14 +2,16 @@
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     color: white;
     display: flex;
     flex-direction: column;
     justify-content:space-between;
     position: relative; /* Required for the blur layer */
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
 }
 
 /* This creates the blurred background layer */
@@ -74,7 +76,7 @@ div{
     margin-top: 50px;
     background-color:transparent; 
     min-height: auto;
-    flex-grow:1;
+    
 }
 .image-container img{
     width:250px;
