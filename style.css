@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Pacifico');
+
 body {
     margin: 0;
     padding: 0;
@@ -7,12 +7,12 @@ body {
     color: white;
     display: flex;
     flex-direction: column;
-    justify-content:flex-start;
-    position: relative; 
+    justify-content:space-between;
+    position: relative; /* Required for the blur layer */
     overflow: hidden;
-    box-sizing: border-box;
 }
 
+/* This creates the blurred background layer */
 body::before {
     content: "";
     position: fixed; /* Keeps it in place while scrolling */
@@ -48,7 +48,7 @@ h1.title{
     text-align: center;
     color: white;
     font-size:1.4rem;
-    margin: 15px 0;
+    margin: 20px 0;
 }
 @keyframes float{
     0% {transform: translateY(0px);}
@@ -71,14 +71,15 @@ div{
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 50px;
     background-color:transparent; 
     min-height: auto;
+    flex-grow:1;
 }
 .image-container img{
-    width:220px;
-    height:170px;
-    margin-bottom: 20px;
+    width:250px;
+    height:190px;
+    margin-bottom: 30px;
     display: block;
     border-radius: 50%;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
@@ -86,16 +87,17 @@ div{
 
 }
 BUTTON{
-    background-color: rgba(3, 3, 102, 0.8);
+    background-color: rgba(3, 3, 102, 0.692);
     color:aliceblue;
     padding:14px 20px;
     margin:8px 0;
     border:2px solid rgb(255, 255, 255);
     cursor: pointer;
-    margin-bottom: 10px; 
-    width: 220px;
-    font-size: 1.1rem;
-    letter-spacing:2px;
+    width:30%;
+    margin-bottom: 20px; 
+    width: 250px;
+    font-size: larger;
+     letter-spacing:2px;
 }
 button:hover{
     opacity: 0.8;
