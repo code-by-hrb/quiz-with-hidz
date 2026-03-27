@@ -2,15 +2,16 @@
 body {
     margin: 0;
     padding: 0;
-    min-height: 100vh;
+    height: 100vh;
     width: 100%;
     color: white;
     display: flex;
     flex-direction: column;
     justify-content:space-between;
     position: relative;
-    overflow-y: auto; 
-    overflow-x: hidden;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 2vh 0;
 }
 
 /* This creates the blurred background layer */
@@ -33,9 +34,13 @@ body::before {
 }
 
 .nav-container{
+    height: 45vh;
+    display:flex;
+    justify-content:center;
     background-color: transparent;
     padding:10px;
     text-align:center;
+    align-items:center;
 }
 h1.title{
     text-shadow: 2px 2px 4px  rgba(0,0, 0.7 );
@@ -78,11 +83,12 @@ div{
     flex-grow:1;
 }
 .image-container img{
-    width:250px;
-    height:190px;
+    width:auto;
+    height:40px;
     margin-bottom: 30px;
     display: block;
     border-radius: 50%;
+    max-height: 250px; 
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
     border:3px solid rgb(255, 255, 255);
 
@@ -95,8 +101,10 @@ BUTTON{
     border:2px solid rgb(255, 255, 255);
     cursor: pointer;
     width:30%;
+    height:50px;
+    margin-top:10px;
     margin-bottom: 20px; 
-    width: 250px;
+    width: 220px;
     font-size: larger;
      letter-spacing:2px;
 }
