@@ -43,7 +43,7 @@ h1.title{
     letter-spacing:2px;
     font-family:'Poppins', sans-serif;
     letter-spacing: 1px;
-    font-size: 2.6rem;
+    font-size: 2.3rem;
     font-weight: 700;
     text-transform: uppercase;
 }
@@ -84,7 +84,8 @@ div{
 }
 .image-container img{
     width:250px;
-    height:190px;
+    height:32vh;
+    max-height: 200px;
     margin-bottom: 30px;
     display: block;
     border-radius: 50%;
