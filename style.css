@@ -2,16 +2,14 @@
 body {
     margin: 0;
     padding: 0;
-    min-height: 100vh;
+    height: 100vh;
     width: 100%;
     color: white;
     display: flex;
     flex-direction: column;
     justify-content:space-between;
     position: relative; /* Required for the blur layer */
-    overflow-x: hidden;
-    overflow-y: auto;
-    box-sizing: border-box;
+    overflow: hidden;
 }
 
 /* This creates the blurred background layer */
@@ -42,10 +40,8 @@ h1.title{
     text-shadow: 2px 2px 4px  rgba(0,0, 0.7 );
     letter-spacing:2px;
     font-family:'Poppins', cursive;
-    letter-spacing: 1px;
-    font-size: 2.2rem;
-    font-weight: 700;
-    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 3rem;
 }
 .floating-text{
     animation: float 3s ease-in-out infinite;
@@ -53,7 +49,6 @@ h1.title{
     color: white;
     font-family:'Poppins', cursive;
     font-size:1.4rem;
-    
     margin: 20px 0;
 }
 @keyframes float{
@@ -80,12 +75,10 @@ div{
     margin-top: 50px;
     background-color:transparent; 
     min-height: auto;
-    
 }
 .image-container img{
     width:250px;
-    height:30vh;
-    max-height: 200px;
+    height:190px;
     margin-bottom: 30px;
     display: block;
     border-radius: 50%;
