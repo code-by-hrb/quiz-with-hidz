@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Pacifico');
+@import url('https://fonts.googleapis.com/css?family=Poppins');
 body {
     margin: 0;
     padding: 0;
@@ -41,15 +41,19 @@ body::before {
 h1.title{
     text-shadow: 2px 2px 4px  rgba(0,0, 0.7 );
     letter-spacing:2px;
-    font-family:'Pacifico', cursive;
-    letter-spacing: 3px;
-    font-size: 3rem;
+    font-family:'Poppins', sans-serif;
+    letter-spacing: 1px;
+    font-size: 2.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 .floating-text{
     animation: float 3s ease-in-out infinite;
     text-align: center;
     color: white;
+    font-family:'Poppins', sans-serif;
     font-size:1.4rem;
+    
     margin: 20px 0;
 }
 @keyframes float{
